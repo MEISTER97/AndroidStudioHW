@@ -80,7 +80,8 @@
                 app:icon="@drawable/arrow_left"
                 app:iconSize="24dp"
                 app:iconGravity="textStart"
-                />
+                android:contentDescription="@string/empty_string" />
+
 
             <View
                 android:layout_width="280dp"
@@ -95,7 +96,8 @@
                 app:iconSize="24dp"
                 app:iconGravity="textStart"
                 android:layout_weight="1"
-                />
+                android:contentDescription="@string/empty_string" />
+
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>

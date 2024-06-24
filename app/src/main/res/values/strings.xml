@@ -3,4 +3,5 @@
     <string name="defaultScore">000</string>
     <string name="right">Right</string>
     <string name="left">Left</string>
+    <string name="empty_string">emptystring</string>
 </resources>
