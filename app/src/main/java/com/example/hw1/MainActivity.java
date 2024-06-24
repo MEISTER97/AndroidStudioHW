@@ -3,6 +3,7 @@ package com.example.hw1;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
@@ -22,6 +23,8 @@ import com.example.hw1.Logic.GameManager;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
     private MaterialTextView main_LBL_score;
     private MaterialButton main_BTN_right;
@@ -31,10 +34,16 @@ public class MainActivity extends AppCompatActivity {
     private AppCompatImageView[] main_IMG_Cactus;
     private GameManager gameManager;
 
+    private CountDownTimer refreshTimer;
+    private CountDownTimer objectCreationTimer;
     private boolean gameRun=false;
     private boolean flag=false;
 
-    private final Handler handler = new Handler(Looper.getMainLooper());
+    private static final long REFRESH_DELAY = 1000; // 1 second delay for refreshing UI
+    private static final long MIN_OBJECT_CREATION_DELAY = 2000; // Minimum 2 seconds delay for object creation
+    private static final long MAX_OBJECT_CREATION_DELAY = 4000; // Maximum 4 seconds delay for object creation
+    private Random random = new Random();
+
 
     int score;
 
@@ -49,30 +58,54 @@ public class MainActivity extends AppCompatActivity {
         gameManager=new GameManager(main_IMG_hearts.length);
         initViews();
         gameIsRunning();
-
     }
+
+    private void startTimers() {
+        startRefreshTimer();
+        startObjectCreationTimer();
+    }
+
+    private void startRefreshTimer() {
+        refreshTimer = new CountDownTimer(9999999, REFRESH_DELAY) { // Arbitrarily large countdown duration
+            @Override
+            public void onTick(long millisUntilFinished) {
+                refreshUI();
+            }
+
+            @Override
+            public void onFinish() {
+            }
+        }.start();
+    }
+
+    private void startObjectCreationTimer() {
+        scheduleNextObjectCreation();
+    }
+
+
+    private void scheduleNextObjectCreation() {
+        long delay = MIN_OBJECT_CREATION_DELAY + random.nextInt((int) (MAX_OBJECT_CREATION_DELAY - MIN_OBJECT_CREATION_DELAY + 1));
+        objectCreationTimer = new CountDownTimer(delay, delay) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+            }
+
+            @Override
+            public void onFinish() {
+                createObject();
+                scheduleNextObjectCreation();
+            }
+        }.start();
+    }
+
 
     private void gameIsRunning() {
         gameRun = true;
         flag=true;
         main_IMG_Rex[1].setVisibility(View.VISIBLE);
-        startRefreshing();
-        startCreatingObjects();
-        refreshUI();
+        startTimers();
     }
 
-    private void startRefreshing() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (gameRun) {
-
-                    refreshUI();
-                    handler.postDelayed(this, 1500); // Schedule next refresh in 1.5 second
-                }
-            }
-        }, 1500); // Initial delay of 1.5 second
-    }
 
     private void initViews() {
         main_LBL_score.setText(String.valueOf(score));
@@ -100,8 +133,10 @@ public class MainActivity extends AppCompatActivity {
         if (gameManager.isGameLost() && flag) {
             // show Lost
             stopGame();
-            flag=false;
+            flag = false;
+
             //     return;
+
         }
         // Update game objects
         gameManager.updateObject();
@@ -134,19 +169,6 @@ public class MainActivity extends AppCompatActivity {
     }
     
 
-
-    private void startCreatingObjects() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (gameRun) {
-                    createObject();
-                    handler.postDelayed(this, 4000); // Schedule next object creation in 4 seconds
-
-                }
-            }
-        }, 4000); // Initial delay of 3 seconds
-    }
 
     private void movingObject() {
         int rows = gameManager.getRows();
