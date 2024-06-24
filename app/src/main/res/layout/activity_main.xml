@@ -17,7 +17,7 @@
         android:layout_marginTop="@dimen/defaultMargin"
         android:layout_marginEnd="@dimen/defaultMargin"
         android:textSize="@dimen/ScoreSize"
-        android:textColor="@color/black"
+        android:textColor="@color/hexColer"
         android:textStyle="bold|italic"
         />
 
@@ -60,7 +60,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -110,21 +109,19 @@
             android:layout_marginBottom="80dp"
             >
 
-            <!-- Top Left -->
+
             <androidx.appcompat.widget.AppCompatImageView
-                android:visibility="invisible"
                 android:id="@+id/main_IMG_Cactus1"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginStart="10dp"
-
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="16dp"
                 android:scaleType="centerCrop"
+                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/cactus" />
 
-            <!-- Top Center -->
             <androidx.appcompat.widget.AppCompatImageView
                 android:visibility="invisible"
                 android:id="@+id/main_IMG_Cactus2"
@@ -132,6 +129,7 @@
                 android:layout_height="100dp"
                 android:layout_marginTop="16dp"
                 android:scaleType="centerCrop"
+                android:layout_marginStart="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -145,7 +143,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="8dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

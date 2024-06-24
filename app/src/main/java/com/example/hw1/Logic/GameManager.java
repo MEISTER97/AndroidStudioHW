@@ -31,6 +31,7 @@ public class GameManager {
         }
     }
 
+
     public GameManager(int lifeCount) {
         this.lifeCount = lifeCount;
     }
@@ -109,11 +110,12 @@ public class GameManager {
             if (objectMatrix[rows - 1][i]== 1 && getPlayerCol()==i) {
                 this.lifeCount--;
                 Log.d("Game status:", "I have been hit :(");
-
+                return;
             }
 
 
         }
+        score++;
 
     }
 

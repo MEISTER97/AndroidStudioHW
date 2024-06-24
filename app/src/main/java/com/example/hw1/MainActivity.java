@@ -34,10 +34,10 @@ public class MainActivity extends AppCompatActivity {
     private boolean gameRun=false;
     private boolean flag=false;
 
-
     private final Handler handler = new Handler(Looper.getMainLooper());
 
-    private int score=0;
+    int score;
+
 
 
     @Override
@@ -66,8 +66,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (gameRun) {
-
-
 
                     refreshUI();
                     handler.postDelayed(this, 1500); // Schedule next refresh in 1.5 second
@@ -107,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
         }
         // Update game objects
         gameManager.updateObject();
+
+        updateScore();
 
         // Refresh the UI based on the updated game state
         movingObject();
@@ -195,6 +195,17 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+    private void updateScore()
+    {
+
+        score =gameManager.getScore();
+
+        // Convert the updated score back to a string
+        String updatedScoreString = String.valueOf(score);
+
+        // Set the updated score in the TextView
+        main_LBL_score.setText(updatedScoreString);
+    }
 
         private void toastAndVibrate(String text)
         {
@@ -217,6 +228,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+
 
 
     private void findViews(){
