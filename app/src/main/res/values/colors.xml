@@ -3,6 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="hexColer">#A4C639</color>
-
+    <color name="BurlyWood">#DEB887</color>
+    <color name="AntiqueWhite">#FAEBD7</color>
+    <color name="DarkGoldenRod">#B8860B</color>
+    <color name="Bisque">#FFE4C4</color>
 
 </resources>

@@ -2,4 +2,6 @@
 <resources>
     <dimen name="defaultMargin">16dp</dimen>
     <dimen name="ScoreSize">32sp</dimen>
+    <dimen name="menu_width">40dp</dimen>
+    <dimen name="menu_height">40dp</dimen>
 </resources>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ActivityHighscore"
+    android:background="@color/AntiqueWhite"
+    >
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/Highscore_BTN_Menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/AntiqueWhite"
+        app:icon="@drawable/arrow_left"
+        android:padding="16dp"
+        app:iconSize="24dp"
+        app:iconGravity="textStart"
+        android:contentDescription="@string/empty_string"
+        android:layout_marginStart="150dp"
+        />
+
+
+    <ScrollView
+        android:id="@+id/Highscore_FRAME_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="20dp"
+        android:background="@color/Bisque">
+
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/Highscore_FRAME_map"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="20dp"
+        android:background="@color/DarkGoldenRod" />
+
+</LinearLayout>
