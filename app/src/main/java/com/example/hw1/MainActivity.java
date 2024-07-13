@@ -129,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements callback_menuOpti
         else {
             startRefreshTimer();
         }
-
         startObjectCreationTimer();
     }
 
@@ -138,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements callback_menuOpti
         startObjectCreationTimer();
     }
 
-    private void stopTimner() {
+    private void stopTimer() {
         if (refreshTimer != null) {
             refreshTimer.cancel();
             refreshTimer = null; // Reset the timer instance
@@ -191,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements callback_menuOpti
         if (refreshTimer == null) {
             startRefreshTimer();
         }
-        if (objectCreationTimer == null) {
+        if (objectCreationTimer == null && pointCreationTimer == null) {
             startObjectCreationTimer();
         }
 
@@ -220,20 +219,22 @@ public class MainActivity extends AppCompatActivity implements callback_menuOpti
     }
 
     private void startObjectCreationTimer() {
-        if(objectCreationTimer != null)
-        {
-            objectCreationTimer.cancel();
-            objectCreationTimer=null;
-            scheduleNextObjectCreation();
+        if(gameRun) {
+            if (objectCreationTimer != null) {
+                objectCreationTimer.cancel();
+                objectCreationTimer = null;
+                scheduleNextObjectCreation();
+            } else {
+                scheduleNextObjectCreation();
+            }
+            if (pointCreationTimer != null) {
+                pointCreationTimer.cancel();
+                pointCreationTimer = null;
+                scheduleNextPointCreation();
+            } else {
+                scheduleNextPointCreation();
+            }
         }
-        scheduleNextObjectCreation();
-
-        if(pointCreationTimer!=null){
-            pointCreationTimer.cancel();
-            pointCreationTimer=null;
-            scheduleNextPointCreation();
-        }
-        scheduleNextPointCreation();
     }
 
 
@@ -347,7 +348,7 @@ public class MainActivity extends AppCompatActivity implements callback_menuOpti
             scoreData = new ScoreData();
             gameRun = false;
             resetGame();
-            stopTimner();
+            stopTimer();
             Log.d("Game status:", "GAME OVER " + gameManager.getScore());
             toastAndVibrate("GAME OVER ");
             scoreData.setScore(score);
@@ -553,11 +554,13 @@ public class MainActivity extends AppCompatActivity implements callback_menuOpti
                 Log.d("Game status:", "Speed change to " + speed);
                 MIN_OBJECT_CREATION_DELAY = 1000;
                 MAX_OBJECT_CREATION_DELAY = 3000;
+                startObjectCreationTimer();
             } else {
                 setRefreshSpeed((long) speed);
                 Log.d("Game status:", "Speed change to " + speed);
                 MIN_OBJECT_CREATION_DELAY = 2000;
                 MAX_OBJECT_CREATION_DELAY = 4000;
+                startObjectCreationTimer();
             }
         }
 
@@ -684,7 +687,7 @@ public class MainActivity extends AppCompatActivity implements callback_menuOpti
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        stopTimner();
+        stopTimer();
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted, proceed with getting the location
