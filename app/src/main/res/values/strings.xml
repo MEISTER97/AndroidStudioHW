@@ -6,7 +6,6 @@
     <string name="empty_string">emptystring</string>
     <string name="fast_speed">Fast Speed</string>
     <string name="meterScore">00000</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fragment_1">Fragment #1</string>
     <string name="sensormode">SensorMode</string>
