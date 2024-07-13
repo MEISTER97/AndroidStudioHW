@@ -1,0 +1,11 @@
+
+-5 lanes and longer roads(bigger matrix)
+-Objects and Points are moving
+-game can be reset after game have ended
+-option in the menu are not saved(I put finish when I change to main activity)
+-there is an Object(ScoreData) which contain the score,Meter score and the coordinate of the player
+-slow mode is the same as normal/default speed
+-the leaderBoard is being sort from the highest score(Not Score Meter)
+-there is a lot of Log Debug used for testing
+-in LeaderBoard pressing on score in MeterScore will update the map location
+-there is a problem in tilt in y , which speed up or slow down the game but because in each tick it will call the update object, objects are moved first and then the speed change as needed
